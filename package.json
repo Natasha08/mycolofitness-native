@@ -13,7 +13,9 @@
 		"react-native": "0.44.0",
 		"react-native-drawer": "^2.3.0",
 		"react-native-router-flux": "^3.39.1",
-		"react-native-uikit": "^0.1.6"
+		"react-native-uikit": "^0.1.6",
+		"react-redux": "^5.0.4",
+		"redux": "^3.6.0"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.24.1",

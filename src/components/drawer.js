@@ -11,13 +11,14 @@ export default class NavigationDrawer extends Component {
         return (
             <Drawer
                 ref="navigation"
+                side="right"
                 open={state.open}
                 onOpen={()=>Actions.refresh({key:state.key, open: true})}
                 onClose={()=>Actions.refresh({key:state.key, open: false})}
                 type="displace"
                 content={<SideMenu />}
                 tapToClose={true}
-                openDrawerOffset={0.2}
+                openDrawerOffset={0.125}
                 panCloseMask={0.2}
                 negotiatePan={true}
                 tweenHandler={(ratio) => ({

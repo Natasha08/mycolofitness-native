@@ -1,5 +1,10 @@
 import authActions from '../actions/auth';
 import {Actions} from 'react-native-router-flux';
+import store from '../store';
+
+import {
+  AsyncStorage
+} from 'react-native';
 
 export default {
   login: function({ email, password }) {
@@ -19,8 +24,10 @@ export default {
       .then( async (responseJson) => {
         if (responseJson.token) {
           try {
+            await AsyncStorage.setItem('token', responseJson.token, (err, result) => {
+              console.log("RESULT", result)
+            });
             Actions.main();
-            // await AsyncStorage.setItem('token', responseJson.token);
           } catch (err) {
             console.log("+++++++++++++++++++++++++ERROR", err);
           }

@@ -4,6 +4,8 @@ import {
   Text,
   View
 } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './src/store';
 
 import {Scene, Router, Reducer, ActionConst, Modal, Actions} from 'react-native-router-flux';
 import Home from './src/pages/home';
@@ -21,17 +23,21 @@ const reducerCreate = params=>{
 
 export default class MainApp extends React.Component {
   render() {
-    return <Router createReducer={reducerCreate} sceneStyle={{backgroundColor:'#fff'}}>
-      <Scene key="drawer" component={NavigationDrawer} open={false}>
-        <Scene key="modal" component={Modal}>
-          <Scene key="root">
-            <Scene key="home" component={Home} title="Home"/>
-            <Scene key="login" component={Login} title="Login"/>
-            <Scene key="main" component={Main} title="Main"/>
+    return (
+      <Provider store={store}>
+        <Router createReducer={reducerCreate} sceneStyle={{backgroundColor:'#fff'}}>
+          <Scene key="drawer" component={NavigationDrawer} open={false}>
+            <Scene key="modal" component={Modal}>
+              <Scene key="root">
+                <Scene key="home" component={Home} title="Home"/>
+                <Scene key="login" component={Login} title="Login"/>
+                <Scene key="main" component={Main} title="Main"/>
+              </Scene>
+            </Scene>
           </Scene>
-        </Scene>
-      </Scene>
-    </Router>;
+        </Router>
+      </Provider>
+    );
   }
 }
 
