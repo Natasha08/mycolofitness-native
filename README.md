@@ -15,7 +15,7 @@
 
 # Running the project
   - Make sure your testing device is connected `adb devices`
-  - In one terminal tab enter `react-native start` (should be running the entire time)
+  - In one terminal tab enter `yarn start` (should be running the entire time)
   - In another tab, run `react-native run-android`
 
 # Testing
@@ -36,6 +36,8 @@
 
 # Errors
 
+#### if after yarn start, there are collision/duplication errors:
+  run `yarn start --reset-cache`
 #### SyntaxError: Strict mode does not allow function declarations in a lexically nested statement on a newly created app
 
 https://github.com/facebook/react-native/issues/11389

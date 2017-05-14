@@ -7,7 +7,7 @@ import {
 import styles from '../styles/style';
 import {Actions} from 'react-native-router-flux';
 
-class Home extends Component {
+class Main extends Component {
   render() {
     return(
       <View style={styles.container}>
@@ -15,11 +15,13 @@ class Home extends Component {
           Welcome to My Fitness App!
         </Text>
         <View>
-          <Button title="Go to Login page" onPress={()=>Actions.login({data:"Custom data", title:'Login' })}></Button>
+          <Text style={styles.text}>
+            I logged in!
+          </Text>
         </View>
       </View>
     );
   }
 };
 
-export default Home;
+export default Main;

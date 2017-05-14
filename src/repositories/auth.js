@@ -1,13 +1,5 @@
 import authActions from '../actions/auth';
-// import efridgeRepository from './repositories/efridge';
-// import egymRepository from './repositories/egym';
-// import store from '../store';
-
-
-// username:admin
-// password:asdf
-// email:natasha@me.com
-// firstname:natasha
+import {Actions} from 'react-native-router-flux';
 
 export default {
   login: function({ email, password }) {
@@ -24,8 +16,15 @@ export default {
         })
       })
       .then((response) => response.json())
-      .then((responseJson) => {
-        const token = responseJson.token;
+      .then( async (responseJson) => {
+        if (responseJson.token) {
+          try {
+            Actions.main();
+            // await AsyncStorage.setItem('token', responseJson.token);
+          } catch (err) {
+            console.log("+++++++++++++++++++++++++ERROR", err);
+          }
+        }
       })
       .catch(function(err) {
         console.log("+++++++++++++++++++++++++ERROR", err);
