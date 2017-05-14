@@ -1,0 +1,29 @@
+{
+	"name": "NativeApp",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"build": "babel src/ -d lib/",
+		"prepublish": "yarn run build",
+		"test": "jest"
+	},
+	"dependencies": {
+		"react": "16.0.0-alpha.6",
+		"react-native": "0.44.0",
+		"react-native-router-flux": "^3.39.1",
+		"react-native-uikit": "^0.1.6"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.24.1",
+		"babel-jest": "20.0.1",
+		"babel-preset-flow": "^6.23.0",
+		"babel-preset-react-native": "1.9.2",
+		"flow-bin": "0.42.0",
+		"jest": "20.0.1",
+		"react-test-renderer": "16.0.0-alpha.6"
+	},
+	"jest": {
+		"preset": "react-native"
+	}
+}
