@@ -11,6 +11,8 @@ import styles from '../../styles/style';
 import AuthRepository from '../../repositories/auth';
 
 class Login extends Component {
+  componentWillMount(){ Actions.refresh({key: 'drawer', open: value => !value}); }
+
   onSubmit(email, password) {
     const loginParams = { email, password };
 
@@ -18,12 +20,9 @@ class Login extends Component {
   };
 
   render() {
-    const state = this.state;
-    console.log("this props", this.props)
     return (
       <View style={styles.login}>
         <LoginForm
-          loginFb={() => console.log('login with facebook')}
           onSubmit={this.onSubmit}
           error={false}
           errorMsg={'username or password incorrect'}

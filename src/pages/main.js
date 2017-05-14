@@ -8,6 +8,8 @@ import styles from '../styles/style';
 import {Actions} from 'react-native-router-flux';
 
 class Main extends Component {
+  componentWillMount(){ Actions.refresh({key: 'drawer', open: value => !value}); }
+
   render() {
     return(
       <View style={styles.container}>

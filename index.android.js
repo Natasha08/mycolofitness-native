@@ -9,6 +9,7 @@ import {Scene, Router, Reducer, ActionConst, Modal, Actions} from 'react-native-
 import Home from './src/pages/home';
 import Login from './src/components/user/login_form';
 import Main from './src/pages/main';
+import NavigationDrawer from './src/components/drawer';
 
 const reducerCreate = params=>{
     const defaultReducer = Reducer(params);
@@ -21,11 +22,13 @@ const reducerCreate = params=>{
 export default class MainApp extends React.Component {
   render() {
     return <Router createReducer={reducerCreate} sceneStyle={{backgroundColor:'#fff'}}>
-      <Scene key="modal" component={Modal}>
-        <Scene key="root">
-          <Scene key="home" component={Home} title="Home"/>
-          <Scene key="login" component={Login} title="Login"/>
-          <Scene key="main" component={Main} title="Main"/>
+      <Scene key="drawer" component={NavigationDrawer} open={false}>
+        <Scene key="modal" component={Modal}>
+          <Scene key="root">
+            <Scene key="home" component={Home} title="Home"/>
+            <Scene key="login" component={Login} title="Login"/>
+            <Scene key="main" component={Main} title="Main"/>
+          </Scene>
         </Scene>
       </Scene>
     </Router>;

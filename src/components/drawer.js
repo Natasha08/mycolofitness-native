@@ -1,56 +1,30 @@
-import { Link, hashHistory } from 'react-router';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import AppBar from 'material-ui/AppBar';
+// Example of Drawer custom renderer based on react-native-drawer. Note that the built-in NavBar component supports toggling of drawer. The Drawer implementation just needs to have a function: toggle() With DefaultRenderer you may build own drawer 'renderer' that transforms current navigation state into drawer. Drawer could check own state (open/close) from navigation state:
+import React, { Component } from 'react';
+import Drawer from 'react-native-drawer';
+import SideMenu from './SideMenu';
+import {Actions, DefaultRenderer} from 'react-native-router-flux';
 
-const title = 'MyColoFitness';
-
-export default React.createClass({
-
-  getInitialState: function() {
-    return {
-      open: false
+export default class NavigationDrawer extends Component {
+    render(){
+        const state = this.props.navigationState;
+        const children = state.children;
+        return (
+            <Drawer
+                ref="navigation"
+                open={state.open}
+                onOpen={()=>Actions.refresh({key:state.key, open: true})}
+                onClose={()=>Actions.refresh({key:state.key, open: false})}
+                type="displace"
+                content={<SideMenu />}
+                tapToClose={true}
+                openDrawerOffset={0.2}
+                panCloseMask={0.2}
+                negotiatePan={true}
+                tweenHandler={(ratio) => ({
+                 main: { opacity:Math.max(0.54,1-ratio) }
+            })}>
+                <DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate} />
+            </Drawer>
+        );
     }
-  },
-
-  handleToggle: function() {
-    this.setState({open: !this.state.open});
-  },
-
-  navigatePage: function(page) {
-    const navigate = hashHistory.push,
-    toggleView = this.handleToggle;
-
-    return (
-      function set() {
-        navigate(page);
-        toggleView();
-      }
-    );
-  },
-
-  logout: function() {
-    this.props.logout();
-    this.handleToggle();
-  },
-
-  render() {
-    // iconClassNameRight="muidocs-icon-navigation-expand-more"
-
-    return (
-      <div>
-        <AppBar
-          title={title}
-          onTouchTap={this.handleToggle}
-        />
-
-        <Drawer open={this.state.open}>
-          <MenuItem onClick={this.navigatePage('/home')}>Home</MenuItem>
-          <MenuItem onClick={this.navigatePage('/efridge')}>E-fridge</MenuItem>
-          <MenuItem onClick={this.navigatePage('/egym')}>E-gym</MenuItem>
-          <MenuItem onClick={this.logout}>Logout</MenuItem>
-        </Drawer>
-      </div>
-    );
-  }
-})
+}

@@ -8,15 +8,14 @@ import styles from '../styles/style';
 import {Actions} from 'react-native-router-flux';
 
 class Home extends Component {
+componentWillMount(){ Actions.refresh({key: 'drawer', open: value => false}); }
+
   render() {
     return(
       <View style={styles.container}>
         <Text style={styles.text}>
           Welcome to My Fitness App!
         </Text>
-        <View>
-          <Button title="Go to Login page" onPress={()=>Actions.login({data:"Custom data", title:'Login' })}></Button>
-        </View>
       </View>
     );
   }
